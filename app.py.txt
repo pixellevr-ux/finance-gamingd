@@ -1,0 +1,104 @@
+import streamlit as st
+import pandas as pd
+import time
+
+# 1. CONFIGURATION DE LA PAGE (DOIT ÊTRE EN PREMIER)
+st.set_page_config(page_title="LOOTVISION ELITE", page_icon="⚡", layout="wide")
+
+# 2. LE DESIGN DE BATARD (CSS CUSTOM)
+st.markdown("""
+    <style>
+    /* Fond noir profond et police futuriste */
+    .stApp {
+        background: radial-gradient(circle, #050505 0%, #000000 100%);
+        color: #00ffcc;
+    }
+    
+    /* Animation de scan néon */
+    @keyframes scan {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* Cartes de stats stylées */
+    .metric-card {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid #ff00ff;
+        border-radius: 15px;
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);
+    }
+
+    /* Bouton Ultra-Stylé */
+    .stButton>button {
+        background: linear-gradient(90deg, #ff00ff, #00ffcc);
+        color: black !important;
+        font-weight: bold !important;
+        border: none !important;
+        border-radius: 50px !important;
+        height: 3em !important;
+        transition: 0.3s;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+    }
+    .stButton>button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px #00ffcc;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+# 3. L'INTERFACE
+st.markdown("<h1 style='text-align: center; font-size: 60px; color: #ff00ff; text-shadow: 0 0 20px #ff00ff;'>⚡ LOOTVISION ELITE</h1>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; color: #00ffcc;'>L'IA qui snype les opportunités pendant que tu dors.</p>", unsafe_allow_html=True)
+
+# Barre de progression stylée
+progress_text = "Initialisation des serveurs de scan..."
+my_bar = st.progress(0, text=progress_text)
+
+for percent_complete in range(100):
+    time.sleep(0.01)
+    my_bar.progress(percent_complete + 1, text=progress_text)
+my_bar.empty()
+
+# Onglets
+tab1, tab2 = st.tabs(["🎮 GAMING BLACK MARKET", "💎 CRYPTO & NFT WHALES"])
+
+with tab1:
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.markdown('<div class="metric-card"><h3>HYPE CS2</h3><h2 style="color:#00ffcc;">+412%</h2></div>', unsafe_allow_html=True)
+    with col2:
+        st.markdown('<div class="metric-card"><h3>VOLUME RUST</h3><h2 style="color:#ff00ff;">$1.2M</h2></div>', unsafe_allow_html=True)
+    with col3:
+        st.markdown('<div class="metric-card"><h3>LIQUIDITÉ</h3><h2 style="color:#ffff00;">OPTIMALE</h2></div>', unsafe_allow_html=True)
+
+    st.write("---")
+    st.subheader("🎯 Signaux de Trading Immédiats")
+    
+    df_game = pd.DataFrame({
+        "Item": ["Karambit Gamma Doppler", "AK-47 Gold Arabesque", "Big Grin (Rust)"],
+        "Confiance IA": ["98%", "85%", "92%"],
+        "Target Profit": ["+1200$", "+450$", "+180$"],
+        "Signal": ["🚀 MOONSHOT", "📈 LONG TERM", "🔥 SCALP"]
+    })
+    st.table(df_game)
+
+with tab2:
+    st.markdown("### 🕵️‍♂️ Analyse des Wallets (Baleines)")
+    st.warning("Alerte : Une baleine vient d'acheter pour 500 ETH de Milady Maker.")
+    
+    if st.button("DÉCRYPTER LA PROCHAINE PÉPITE 🎯"):
+        with st.spinner('Calcul des probabilités par réseau neuronal...'):
+            time.sleep(1.5)
+            st.balloons()
+            st.success("PÉPITE DÉTECTÉE : **$SOLANA** (Target: 250$)")
+            st.code("Signal ID: #SNIPER-99 \nToken: $SOL \nEntry: Market \nTake Profit: Moon", language="markdown")
+
+# Footer
+st.sidebar.image("https://flaticon.com", width=100)
+st.sidebar.title("Paramètres Sniper")
+st.sidebar.slider("Niveau de risque", 1, 100, 75)
+st.sidebar.checkbox("Notifications Telegram")
